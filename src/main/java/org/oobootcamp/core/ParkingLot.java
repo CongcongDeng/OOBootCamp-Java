@@ -4,12 +4,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParkingLot {
-    private final int capacity;
-    private final String identify = "xxx";
+    private int capacity;
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getIdentify() {
+        return identify;
+    }
+
+    public void setIdentify(String identify) {
+        this.identify = identify;
+    }
+
+    public List<Car> getCarList() {
+        return carList;
+    }
+
+    public void setCarList(List<Car> carList) {
+        this.carList = carList;
+    }
+
+    private String identify = "xxx";
     private List<Car> carList = new ArrayList();
 
-    public ParkingLot(int capacity) {
+    public ParkingLot(int capacity,String identify) {
         this.capacity = capacity;
+        this.identify = identify;
     }
 
     public Ticket park(Car car) throws Exception {
