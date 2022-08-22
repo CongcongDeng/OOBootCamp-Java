@@ -10,10 +10,28 @@ public class SmartParkingBoy {
   }
 
   public Ticket park(Car car) throws Exception {
-    return null;
+    int empty = 0;
+    ParkingLot parkingLotMostEmpty = null;
+    for (ParkingLot parkingLot : parkingLots) {
+      int emptySpaceNumber = parkingLot.getCapacity()-parkingLot.getCarList().size();
+      if (emptySpaceNumber>empty){
+        empty = emptySpaceNumber;
+        parkingLotMostEmpty = parkingLot;
+      }
+    }
+    if (parkingLotMostEmpty!=null){
+      return parkingLotMostEmpty.park(car);
+    }
+    throw new Exception("车位已满");
   }
 
   public Car pick(Ticket ticket) throws Exception {
-    return null;
-  }
+    for (ParkingLot parkingLot : parkingLots) {
+      String identify = parkingLot.getIdentify();
+      if (ticket.getIdentify().equals(identify)) {
+        Car car = parkingLot.pick(ticket);
+        return car;
+      }
+    }
+    throw new Exception("无效票");  }
 }
