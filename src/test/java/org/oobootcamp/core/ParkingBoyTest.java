@@ -13,7 +13,7 @@ class ParkingBoyTest {
 //    given
     ParkingLot parkingLotA = new ParkingLot(10, "parkingLotA");
     ParkingLot parkingLotB = new ParkingLot(10, "parkingLotB");
-    Car car = new Car("1111");
+    Car car = new Car("鄂A1111");
     LinkedList<ParkingLot> parkingLots = new LinkedList<>();
     parkingLots.add(parkingLotA);
     parkingLots.add(parkingLotB);
@@ -31,9 +31,9 @@ class ParkingBoyTest {
       throws Exception {
 //    given
     ParkingLot parkingLotA = new ParkingLot(1, "parkingLotA");
-    parkingLotA.park(new Car("11"));
+    parkingLotA.park(new Car("鄂A1111"));
     ParkingLot parkingLotB = new ParkingLot(10, "parkingLotB");
-    Car car = new Car("1111");
+    Car car = new Car("鄂A2222");
     LinkedList<ParkingLot> parkingLots = new LinkedList<>();
     parkingLots.add(parkingLotA);
     parkingLots.add(parkingLotB);
@@ -51,10 +51,10 @@ class ParkingBoyTest {
       throws Exception {
 //    given
     ParkingLot parkingLotA = new ParkingLot(1, "parkingLotA");
-    parkingLotA.park(new Car("11"));
+    parkingLotA.park(new Car("鄂A1111"));
     ParkingLot parkingLotB = new ParkingLot(1, "parkingLotB");
-    parkingLotB.park(new Car("111"));
-    Car car = new Car("1111");
+    parkingLotB.park(new Car("鄂A2222"));
+    Car car = new Car("鄂A3333");
     LinkedList<ParkingLot> parkingLots = new LinkedList<>();
     parkingLots.add(parkingLotA);
     parkingLots.add(parkingLotB);
@@ -78,7 +78,7 @@ class ParkingBoyTest {
     parkingLots.add(parkingLotA);
     parkingLots.add(parkingLotB);
     ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-    Ticket ticket = parkingBoy.park(new Car("1111"));
+    Ticket ticket = parkingBoy.park(new Car("鄂A1111"));
 //    when
     Car car = parkingBoy.pick(ticket);
 //   then
@@ -86,7 +86,7 @@ class ParkingBoyTest {
   }
 
   @Test
-  void should_pick_successful_when_pickup_given_a_used_ticket()
+  void should_pick_failed_when_pickup_given_a_used_ticket()
       throws Exception {
     //    given
     ParkingLot parkingLotA = new ParkingLot(10, "parkingLotA");
@@ -95,7 +95,7 @@ class ParkingBoyTest {
     parkingLots.add(parkingLotA);
     parkingLots.add(parkingLotB);
     ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-    Ticket ticket = parkingBoy.park(new Car("1111"));
+    Ticket ticket = parkingBoy.park(new Car("鄂A1111"));
     parkingBoy.pick(ticket);
     //    when
     Exception exception = assertThrows(Exception.class, () -> {
@@ -106,7 +106,7 @@ class ParkingBoyTest {
   }
 
   @Test
-  void should_pick_successful_when_pickup_given_another_parkingLot_ticket()
+  void should_pick_failed_when_pickup_given_another_parkingLot_ticket()
       throws Exception {
     //    given
     ParkingLot parkingLotA = new ParkingLot(10, "parkingLotA");
@@ -115,10 +115,10 @@ class ParkingBoyTest {
     parkingLots.add(parkingLotA);
     parkingLots.add(parkingLotB);
     ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-    parkingBoy.park(new Car("1111"));
+    parkingBoy.park(new Car("鄂A1111"));
     //    when
     Exception exception = assertThrows(Exception.class, () -> {
-      parkingBoy.pick(new Ticket("1111","parkingLotOther"));
+      parkingBoy.pick(new Ticket("鄂A1111","parkingLotOther"));
     });
     //   then
     assertEquals("无效票", exception.getMessage());

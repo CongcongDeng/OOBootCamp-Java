@@ -28,6 +28,6 @@ public class ParkingBoy {
         return car;
       }
     }
-    return null;
+    throw new Exception("无效票");
   }
 }
