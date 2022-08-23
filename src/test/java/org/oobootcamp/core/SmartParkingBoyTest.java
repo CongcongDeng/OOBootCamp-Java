@@ -110,7 +110,7 @@ class SmartParkingBoyTest {
         smartParkingBoy.park(new Car("鄂A1111"));
 //        when
         Exception exception = assertThrows(Exception.class, () -> {
-            smartParkingBoy.pick(new Ticket("鄂A1111","parkingLotOther"));
+            smartParkingBoy.pick(new Ticket("鄂A1111", "parkingLotOther"));
         });
 //        then
         assertEquals("无效票", exception.getMessage());
