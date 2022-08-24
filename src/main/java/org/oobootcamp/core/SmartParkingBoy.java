@@ -1,39 +1,21 @@
 package org.oobootcamp.core;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
-public class SmartParkingBoy {
-    private List<ParkingLot> parkingLots;
+public class SmartParkingBoy extends ParkingBoy {
 
-    public SmartParkingBoy(List<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+  public SmartParkingBoy(List<ParkingLot> parkingLots) {
+    super(parkingLots);
+  }
+
+  public Ticket park(Car car) throws Exception {
+    Optional<ParkingLot> max = super.getParkingLots().stream().max(Comparator.comparing(ParkingLot::getSpareParkingSpace));
+    ParkingLot parkingLotMostEmpty = max.get();
+    if (parkingLotMostEmpty != null || parkingLotMostEmpty.getSpareParkingSpace() != 0) {
+      return parkingLotMostEmpty.park(car);
     }
-
-    public Ticket park(Car car) throws Exception {
-//         TODO delete loop maybe better
-        int empty = 0;
-        ParkingLot parkingLotMostEmpty = null;
-        for (ParkingLot parkingLot : parkingLots) {
-            int emptySpaceNumber = parkingLot.getSpareParkingSpace();
-            if (emptySpaceNumber > empty) {
-                empty = emptySpaceNumber;
-                parkingLotMostEmpty = parkingLot;
-            }
-        }
-        if (parkingLotMostEmpty != null) {
-            return parkingLotMostEmpty.park(car);
-        }
-        throw new Exception("车位已满");
-    }
-
-    public Car pick(Ticket ticket) throws Exception {
-        for (ParkingLot parkingLot : parkingLots) {
-            Car car = parkingLot.hasTheCar(ticket);
-            String identify = parkingLot.getIdentify();
-            if (car != null && ticket.getIdentify().equals(identify)) {
-                return parkingLot.pick(ticket);
-            }
-        }
-        throw new Exception("无效票");
-    }
+    throw new Exception("车位已满");
+  }
 }

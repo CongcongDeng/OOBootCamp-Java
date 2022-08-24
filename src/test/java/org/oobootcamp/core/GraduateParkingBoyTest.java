@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.LinkedList;
 import org.junit.jupiter.api.Test;
 
-class ParkingBoyTest {
+class GraduateParkingBoyTest {
 
   @Test
   void should_park_successful_to_A_when_parking_given_parkingLotA_and_parkingLotB_have_remain_spaces()
@@ -17,10 +17,10 @@ class ParkingBoyTest {
     LinkedList<ParkingLot> parkingLots = new LinkedList<>();
     parkingLots.add(parkingLotA);
     parkingLots.add(parkingLotB);
-    ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+    GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingLots);
 
 //    when
-    Ticket ticket = parkingBoy.park(car);
+    Ticket ticket = graduateParkingBoy.park(car);
 //   then
     assertEquals(car.getCarPlateLicense(), ticket.getCarPlateLicense());
     assertEquals(ticket.getIdentify(), parkingLotA.getIdentify());
@@ -37,10 +37,10 @@ class ParkingBoyTest {
     LinkedList<ParkingLot> parkingLots = new LinkedList<>();
     parkingLots.add(parkingLotA);
     parkingLots.add(parkingLotB);
-    ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+    GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingLots);
 
 //    when
-    Ticket ticket = parkingBoy.park(car);
+    Ticket ticket = graduateParkingBoy.park(car);
 //   then
     assertEquals(car.getCarPlateLicense(), ticket.getCarPlateLicense());
     assertEquals(ticket.getIdentify(), parkingLotB.getIdentify());
@@ -58,11 +58,11 @@ class ParkingBoyTest {
     LinkedList<ParkingLot> parkingLots = new LinkedList<>();
     parkingLots.add(parkingLotA);
     parkingLots.add(parkingLotB);
-    ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+    GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingLots);
 
 //    when
     Exception exception = assertThrows(Exception.class, () -> {
-      parkingBoy.park(car);
+      graduateParkingBoy.park(car);
     });
 //   then
     assertEquals("车位已满", exception.getMessage());
@@ -77,10 +77,10 @@ class ParkingBoyTest {
     LinkedList<ParkingLot> parkingLots = new LinkedList<>();
     parkingLots.add(parkingLotA);
     parkingLots.add(parkingLotB);
-    ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-    Ticket ticket = parkingBoy.park(new Car("鄂A1111"));
+    GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingLots);
+    Ticket ticket = graduateParkingBoy.park(new Car("鄂A1111"));
 //    when
-    Car car = parkingBoy.pick(ticket);
+    Car car = graduateParkingBoy.pick(ticket);
 //   then
     assertEquals(ticket.getCarPlateLicense(), car.getCarPlateLicense());
   }
@@ -94,12 +94,12 @@ class ParkingBoyTest {
     LinkedList<ParkingLot> parkingLots = new LinkedList<>();
     parkingLots.add(parkingLotA);
     parkingLots.add(parkingLotB);
-    ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-    Ticket ticket = parkingBoy.park(new Car("鄂A1111"));
-    parkingBoy.pick(ticket);
+    GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingLots);
+    Ticket ticket = graduateParkingBoy.park(new Car("鄂A1111"));
+    graduateParkingBoy.pick(ticket);
     //    when
     Exception exception = assertThrows(Exception.class, () -> {
-      parkingBoy.pick(ticket);
+      graduateParkingBoy.pick(ticket);
     });
     //   then
     assertEquals("无效票", exception.getMessage());
@@ -114,11 +114,11 @@ class ParkingBoyTest {
     LinkedList<ParkingLot> parkingLots = new LinkedList<>();
     parkingLots.add(parkingLotA);
     parkingLots.add(parkingLotB);
-    ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
-    parkingBoy.park(new Car("鄂A1111"));
+    GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingLots);
+    graduateParkingBoy.park(new Car("鄂A1111"));
     //    when
     Exception exception = assertThrows(Exception.class, () -> {
-      parkingBoy.pick(new Ticket("鄂A1111","parkingLotOther"));
+      graduateParkingBoy.pick(new Ticket("鄂A1111","parkingLotOther"));
     });
     //   then
     assertEquals("无效票", exception.getMessage());

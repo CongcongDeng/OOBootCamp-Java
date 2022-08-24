@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SmartParkingBoyTest {
+class SmartGraduateParkingBoyTest {
     @Test
     void should_park_successful_to_parkingLotB_when_parking_given_parkingLotA_remain_spaces_less_than_parkingLotB() throws Exception {
 //        given
