@@ -10,22 +10,13 @@ public abstract class ParkingBoy {
     this.parkingLots = parkingLots;
   }
 
-  private List<ParkingLot> parkingLots;
+  protected List<ParkingLot> parkingLots;
   public Car pick(Ticket ticket) throws Exception {
     for (ParkingLot parkingLot : parkingLots) {
-      if (ticket.getIdentify().equals(parkingLot.getIdentify()) && parkingLot.hasTheCar(ticket)) {
+      if (parkingLot.hasTheCar(ticket)) {
         return parkingLot.pick(ticket);
       }
     }
     throw new Exception("无效票");
   }
-
-  public List<ParkingLot> getParkingLots() {
-    return parkingLots;
-  }
-
-  public void setParkingLots(List<ParkingLot> parkingLots) {
-    this.parkingLots = parkingLots;
-  }
-
 }

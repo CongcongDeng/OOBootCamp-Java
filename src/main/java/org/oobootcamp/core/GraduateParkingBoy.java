@@ -9,7 +9,7 @@ public class GraduateParkingBoy extends ParkingBoy{
   }
 
   public Ticket park(Car car) throws Exception {
-    for (ParkingLot parkingLot : super.getParkingLots()) {
+    for (ParkingLot parkingLot : parkingLots) {
       if (parkingLot.hasSpareParkingSpace()) {
         Ticket ticket = parkingLot.park(car);
         return ticket;

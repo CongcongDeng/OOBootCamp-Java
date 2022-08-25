@@ -7,8 +7,4 @@ public class Car {
         this.carPlateLicense = carPlateLicense;
     }
 
-    public String getCarPlateLicense() {
-        return carPlateLicense;
-    }
-
 }
