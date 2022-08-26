@@ -14,6 +14,6 @@ public class SmartParkingBoy extends ParkingBoy {
     return  parkingLots.stream()
             .filter(parkingLot -> parkingLot.hasSpareParkingSpace())
             .max(Comparator.comparingInt(ParkingLot::getSpareParkingSpace))
-            .orElseThrow().park(car);
+            .orElseThrow(()->new Exception("车位已满")).park(car);
   }
 }
