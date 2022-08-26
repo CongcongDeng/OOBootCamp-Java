@@ -12,6 +12,10 @@ public abstract class ParkingBoy {
 
   protected List<ParkingLot> parkingLots;
 
+  public List<ParkingLot> getParkingLots() {
+    return parkingLots;
+  }
+
   public Car pick(Ticket ticket) throws Exception {
     for (ParkingLot parkingLot : parkingLots) {
       if (parkingLot.hasTheCar(ticket)) {
@@ -21,9 +25,18 @@ public abstract class ParkingBoy {
     throw new Exception("无效票");
   }
 
-  public boolean hasSpareSpaces() {
+  public boolean hasSpareParkingLot() {
     for (ParkingLot parkingLot : parkingLots) {
       if (parkingLot.hasSpareParkingSpace()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean hasTheParkingLot(Ticket ticket) {
+    for (ParkingLot parkingLot : parkingLots) {
+      if (parkingLot.hasTheCar(ticket)) {
         return true;
       }
     }
