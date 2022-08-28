@@ -9,13 +9,10 @@ public class GraduateParkingBoy extends ParkingBoy{
   }
 
   public Ticket park(Car car) throws Exception {
-    for (ParkingLot parkingLot : parkingLots) {
-      if (parkingLot.hasSpareParkingSpace()) {
-        Ticket ticket = parkingLot.park(car);
-        return ticket;
-      }
-    }
-    throw new Exception("车位已满");
+    return parkingLots.stream()
+            .filter(parkingLot -> parkingLot.hasSpareParkingSpace()).findFirst()
+            .orElseThrow(()->new Exception("车位已满"))
+            .park(car);
   }
 
   @Override

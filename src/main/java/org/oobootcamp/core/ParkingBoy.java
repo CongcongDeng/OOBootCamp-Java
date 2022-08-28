@@ -16,22 +16,17 @@ public abstract class ParkingBoy implements ParkingAble {
 
   @Override
   public Car pick(Ticket ticket) throws Exception {
-    for (ParkingLot parkingLot : parkingLots) {
-      if (parkingLot.hasTheCar(ticket)) {
-        return parkingLot.pick(ticket);
-      }
-    }
-    throw new Exception("无效票");
+    return parkingLots.stream()
+            .filter(parkingLot -> parkingLot.hasTheCar(ticket)).findFirst()
+            .orElseThrow(()->new Exception("无效票"))
+            .pick(ticket);
   }
 
   @Override
   public boolean hasSpareParkingSpace() {
-    for (ParkingLot parkingLot : parkingLots) {
-      if (parkingLot.hasSpareParkingSpace()) {
-        return true;
-      }
-    }
-    return false;
+    return parkingLots.stream()
+            .filter(parkingLot -> parkingLot.hasSpareParkingSpace()).findFirst()
+            .isPresent();
   }
 
 }
