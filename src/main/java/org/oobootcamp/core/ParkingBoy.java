@@ -2,9 +2,7 @@ package org.oobootcamp.core;
 
 import java.util.List;
 
-public abstract class ParkingBoy {
-
-  public abstract Ticket park(Car car) throws Exception;
+public abstract class ParkingBoy implements ParkingAble {
 
   public ParkingBoy(List<ParkingLot> parkingLots) {
     this.parkingLots = parkingLots;
@@ -16,6 +14,7 @@ public abstract class ParkingBoy {
     return parkingLots;
   }
 
+  @Override
   public Car pick(Ticket ticket) throws Exception {
     for (ParkingLot parkingLot : parkingLots) {
       if (parkingLot.hasTheCar(ticket)) {
@@ -25,7 +24,8 @@ public abstract class ParkingBoy {
     throw new Exception("无效票");
   }
 
-  public boolean hasSpareParkingLot() {
+  @Override
+  public boolean hasSpareParkingSpace() {
     for (ParkingLot parkingLot : parkingLots) {
       if (parkingLot.hasSpareParkingSpace()) {
         return true;
@@ -34,12 +34,4 @@ public abstract class ParkingBoy {
     return false;
   }
 
-  public boolean hasTheParkingLot(Ticket ticket) {
-    for (ParkingLot parkingLot : parkingLots) {
-      if (parkingLot.hasTheCar(ticket)) {
-        return true;
-      }
-    }
-    return false;
-  }
 }

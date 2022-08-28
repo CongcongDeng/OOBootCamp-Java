@@ -18,6 +18,14 @@ public class GraduateParkingBoy extends ParkingBoy{
     throw new Exception("车位已满");
   }
 
+  @Override
+  public boolean hasTheCar(Ticket ticket) {
+    return parkingLots.stream()
+            .filter(parkingLot -> parkingLot.hasTheCar(ticket))
+            .findFirst()
+            .isPresent();
+  }
+
 
 }
 

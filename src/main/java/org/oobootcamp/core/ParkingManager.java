@@ -4,19 +4,14 @@ import java.util.List;
 
 public class ParkingManager {
 
-  private List<ParkingLot> parkingLots;
-  private List<ParkingBoy> parkingBoys;
+  private List<ParkingAble> parkingAbles;
+  public ParkingManager(List<ParkingAble> parkingAbles) {
+    this.parkingAbles = parkingAbles;
+  }
 
   public Ticket park(Car car) throws Exception {
-    ParkingBoy parkingBoy1 = parkingBoys.stream()
-            .filter(parkingBoy -> parkingBoy.hasSpareParkingLot())
-            .findFirst()
-            .orElse(null);
-    if(parkingBoy1 != null){
-      return parkingBoy1.park(car);
-    }
-    return parkingLots.stream()
-            .filter(parkingLot -> parkingLot.hasSpareParkingSpace())
+    return parkingAbles.stream()
+            .filter(parkingAble -> parkingAble.hasSpareParkingSpace())
             .findFirst()
             .orElseThrow(()-> new Exception("车位已满"))
             .park(car);
@@ -25,22 +20,11 @@ public class ParkingManager {
   ;
 
   public Car pick(Ticket ticket) throws Exception {
-    ParkingBoy parkingBoy1 = parkingBoys.stream()
-            .filter(parkingBoy -> parkingBoy.hasTheParkingLot(ticket))
+    return parkingAbles.stream()
+            .filter(parkingAble -> parkingAble.hasTheCar(ticket))
             .findFirst()
-            .orElse(null);
-    if(parkingBoy1 != null){
-      return parkingBoy1.pick(ticket);
-    }
-    return parkingLots.stream()
-            .filter(parkingLot -> parkingLot.hasTheCar(ticket))
-            .findFirst()
-            .orElseThrow(()->new Exception("无效票")).pick(ticket);
-  }
-
-  public ParkingManager(List<ParkingLot> parkingLots, List<ParkingBoy> parkingBoys) {
-    this.parkingLots = parkingLots;
-    this.parkingBoys = parkingBoys;
+            .orElseThrow(()->new Exception("无效票"))
+            .pick(ticket);
   }
 
 }

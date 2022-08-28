@@ -3,7 +3,7 @@ package org.oobootcamp.core;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ParkingLot {
+public class ParkingLot implements ParkingAble {
 
     private int capacity;
 
@@ -12,7 +12,7 @@ public class ParkingLot {
     public ParkingLot(int capacity) {
         this.capacity = capacity;
     }
-
+    @Override
     public Ticket park(Car car) throws Exception {
         if (capacity > parkedCars.size()) {
             Ticket ticket = new Ticket();
@@ -22,6 +22,7 @@ public class ParkingLot {
         throw new Exception("车位已满");
     }
 
+    @Override
     public Car pick(Ticket ticket) throws Exception {
         if (parkedCars.containsKey(ticket)) {
             return parkedCars.remove(ticket);
@@ -29,11 +30,13 @@ public class ParkingLot {
         throw new Exception("无效票");
     }
 
-    protected boolean hasTheCar(Ticket ticket) {
+    @Override
+    public boolean hasTheCar(Ticket ticket) {
         return parkedCars.containsKey(ticket);
     }
 
-    protected boolean hasSpareParkingSpace() {
+    @Override
+    public boolean hasSpareParkingSpace() {
         return this.capacity > this.parkedCars.size();
     }
 
